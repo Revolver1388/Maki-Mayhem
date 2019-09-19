@@ -48,19 +48,33 @@ public class PlayerMovement : MonoBehaviour
     float j_counter;
     float j_Stregnth = 0.5f;
     float j_time;
-    float j_maxTime = 0.5f;
+    float j_maxTime = 0.2f;
     float h_time = 0.2f;
     [SerializeField]
     float j_height;
     bool j_on = false;
     bool j_release = true;
     bool f_on = false;
+    float startOfJump;
+    [Range(0, 5)]
+    public float time;
+    [Range(0, 5)]
+    public float duration;
+    [Range(0, 20)]
+    public float x;
+    [Range(0, 20)]
+    public float y;
+    [Range(0, 20)]
+    public float z;
+
+    public Vector3 ending;
+    public Vector3 start;
     #endregion
 
     //Lives
     public List<GameObject> lives = new List<GameObject>();
     public float nbrLives = 3;
-
+    public bool takeDmg = false;
     //Enemies
     GameObject sake;
 
@@ -101,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetButtonDown("Jump") && j_time >= j_maxTime)
         {
+            startOfJump = transform.position.y;
             j_on = false;
             j_release = true;
         }
@@ -134,8 +149,9 @@ public class PlayerMovement : MonoBehaviour
             float hitWall = wall.point.z + (playerSize.z/2 - distWall);
             rb.position = new Vector3(rb.position.x + movement.x * m_Step, rb.position.y + movement.y * m_Step, hitWall);
 
-            if (wall.collider.gameObject.tag == "Sake")
+            if (wall.collider.gameObject.tag == "Sake" && !takeDmg)
             {
+                StartCoroutine(DamageTimer());
                 nbrLives -= 1;
             }
         }
@@ -145,8 +161,9 @@ public class PlayerMovement : MonoBehaviour
             float hitWall = wall.point.z + (playerSize.z/2 + distWall);
             rb.position = new Vector3(rb.position.x + movement.x * m_Step, rb.position.y + movement.y * m_Step, hitWall);
 
-            if (wall.collider.gameObject.tag == "Sake")
+            if (wall.collider.gameObject.tag == "Sake" && !takeDmg)
             {
+                StartCoroutine(DamageTimer());
                 nbrLives -= 1;
             }
         }
@@ -156,9 +173,11 @@ public class PlayerMovement : MonoBehaviour
             float hitWall = wall.point.x + (playerSize.x/2 + distWall);
             rb.position = new Vector3(hitWall, rb.position.y + movement.y * m_Step, rb.position.z + movement.z * m_Step);
 
-            if (wall.collider.gameObject.tag == "Sake")
+            if (wall.collider.gameObject.tag == "Sake" && !takeDmg)
             {
+                StartCoroutine(DamageTimer());
                 nbrLives -= 1;
+                
             }
         }
 
@@ -167,8 +186,9 @@ public class PlayerMovement : MonoBehaviour
             float hitWall = wall.point.x - (playerSize.x/2 - distWall);
             rb.position = new Vector3(hitWall, rb.position.y + movement.y * m_Step, rb.position.z + movement.z * m_Step);
 
-            if (wall.collider.gameObject.tag == "Sake")
+            if (wall.collider.gameObject.tag == "Sake" && !takeDmg)
             {
+                StartCoroutine(DamageTimer());
                 nbrLives -= 1;
             }
         }
@@ -212,13 +232,14 @@ public class PlayerMovement : MonoBehaviour
             rotation.x = 0.0f;
             rotation.z = 0.0f;
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, rotation, rotateSpeed * Time.deltaTime));
-            rb.MovePosition(rb.position + movement * m_Step);
+            rb.MovePosition(rb.position + movement * m_Step *.25f);
         }
         #endregion
 
         #region Jump Stuff
         if (j_on && !j_release)
         {
+           
             StartCoroutine("WaitforInput", h_time);
         }
         if (f_on)
@@ -311,15 +332,19 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position + movement * Time.deltaTime);
     }
 
-    void Jump()
+    void Jump(float t)
     {
-        float yPos = rb.position.y;
-        float yVel = j_Stregnth + g_accel * Time.deltaTime;
-        float jumpHeight = yPos + yVel;
-        movement.y = yPos + yVel;
-        rb.MovePosition(rb.position + movement * Time.deltaTime);
-        j_time += Time.deltaTime;
+        //*****************************OLD JUMP CODE **********************************************************
+        //float yPos = rb.position.y;
+        //float yVel = j_Stregnth + g_accel * Time.deltaTime;
+        //float jumpHeight = yPos + yVel;
+        //movement.y = yPos + yVel;
+        //rb.MovePosition(rb.position + movement * Time.deltaTime);
+        //*****************************************************************************************************
 
+        j_time += Time.deltaTime;
+        ending = new Vector3(rb.position.x + (movement.x/4), y + t, rb.position.z + (movement.z/4));
+        transform.position = Vector3.Slerp(transform.position, ending, EaseIn(time / duration) * Time.deltaTime);
     }
 
 
@@ -328,16 +353,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (j_time < j_maxTime)
         {
-            Jump();
+            Jump(startOfJump);
         }
-
         yield return new WaitForSeconds(t);
-    }
-
-    IEnumerator Hover(float t)
-    {
-        yield return new WaitForSeconds(t);
-        f_on = true;
     }
 
     IEnumerator GameOver()
@@ -345,6 +363,17 @@ public class PlayerMovement : MonoBehaviour
         gameMan.GetComponent<GameManager>().gameOver = true;
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(sceneName);
+    }
+
+    IEnumerator DamageTimer()
+    {
+        takeDmg = true;
+        yield return new WaitForSeconds(.3f);
+        takeDmg = false;
+    }
+    public static float EaseIn(float t)
+    {
+        return t * t;
     }
 }
 

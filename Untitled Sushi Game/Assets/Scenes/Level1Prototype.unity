@@ -15929,6 +15929,22 @@ PrefabInstance:
       propertyPath: lives.Array.data[2]
       value: 
       objectReference: {fileID: 1332254429}
+    - target: {fileID: 1088205254, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
+      propertyPath: y
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088205254, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
+      propertyPath: time
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088205254, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
+      propertyPath: duration
+      value: 0.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088205254, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
+      propertyPath: x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1088205255, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
       propertyPath: myRice.Array.size
       value: 20
