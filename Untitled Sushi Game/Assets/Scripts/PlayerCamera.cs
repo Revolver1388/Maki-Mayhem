@@ -115,7 +115,6 @@ public class PlayerCamera : MonoBehaviour
         aimer.transform.LookAt(main.transform.position);
         if (Physics.Raycast(aimer.transform.position, aimer.transform.TransformDirection(Vector3.forward), out hit,10, layerMask))
         {
-            Debug.DrawRay(aimer.transform.position, aimer.transform.TransformDirection(Vector3.forward), Color.blue, distFromPlayer);
             float dist = hit.distance;
             if (dist < distFromPlayer)
             {

@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     //sprint 
     float runTime = 0;
-    float maxRunTime = 2;
+    float maxRunTime = 1.3f;
 
     //Jumping Parametres
 
@@ -75,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
     public List<GameObject> lives = new List<GameObject>();
     public float nbrLives = 3;
     public bool takeDmg = false;
+
     //Enemies
     GameObject sake;
 
@@ -105,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (isGrounded())
         {
+            startOfJump = transform.position.y;
             f_on = false;
             j_time = 0.0f;
         }
@@ -114,8 +116,7 @@ public class PlayerMovement : MonoBehaviour
             j_release = false;
         }
         else if (Input.GetButtonDown("Jump") && j_time >= j_maxTime)
-        {
-            startOfJump = transform.position.y;
+        {          
             j_on = false;
             j_release = true;
         }
@@ -129,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
             runTime += 1 * Time.deltaTime;
             if (runTime < maxRunTime)
             {
-                p_Speed = 8;
+                p_Speed = 3;
             }
             else if (runTime >= maxRunTime)
             {
@@ -218,7 +219,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //Player movement section
         #region Player Movement
         if (isGrounded() && !j_on)
         {
@@ -253,6 +253,8 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
     }
+
+    #region BoundaryChecks
 
     public bool isGrounded()
     {
@@ -322,6 +324,7 @@ public class PlayerMovement : MonoBehaviour
 
         return Physics.Linecast(lineStart, vectorToSearch, out above, layerMask);
     }
+    #endregion
 
     void Fall()
     {

@@ -15830,15 +15830,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sushi_Roll
       objectReference: {fileID: 0}
-    - target: {fileID: 7147114729487880583, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147114729487880583, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
+    - target: {fileID: 794047754, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4897764932610506510, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
         type: 3}
@@ -15895,28 +15889,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8178619480444889901, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3187961965897000109, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.748
-      objectReference: {fileID: 0}
-    - target: {fileID: 1088205254, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
-      propertyPath: lives.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1088205254, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
-      propertyPath: height
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1088205254, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 773700455}
     - target: {fileID: 1088205254, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
       propertyPath: lives.Array.data[0]
       value: 
@@ -15930,39 +15902,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1332254429}
     - target: {fileID: 1088205254, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
-      propertyPath: y
-      value: 2.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1088205254, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
-      propertyPath: time
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1088205254, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
       propertyPath: duration
-      value: 0.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 1088205254, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
-      propertyPath: x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1088205255, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
-      propertyPath: myRice.Array.size
-      value: 20
+      value: 0.82
       objectReference: {fileID: 0}
     - target: {fileID: 1088205255, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
       propertyPath: l_Manager
       value: 
       objectReference: {fileID: 292550791}
-    - target: {fileID: 5851801040841001600, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4650115049442055047, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
 --- !u!4 &1481187822211262714 stripped

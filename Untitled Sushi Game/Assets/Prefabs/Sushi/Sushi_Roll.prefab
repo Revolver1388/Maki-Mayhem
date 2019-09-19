@@ -48,7 +48,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8178619480444889901}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RiceSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4650115049442055047}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.2}
+  m_LocalPosition: {x: 0, y: -0.1, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4897764932610506510}
@@ -78,7 +78,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3187961965897000109}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SoyPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5851801040841001600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.748}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4897764932610506510}
@@ -115,9 +115,9 @@ GameObject:
   - component: {fileID: 1088205251}
   - component: {fileID: 1088205254}
   - component: {fileID: 1088205255}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sushi_Roll
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -318,19 +318,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 238bd18f158d15947a8e10f60625a115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheckDist: 0
-  cam: {fileID: 0}
-  rotateSpeed: 8
-  p_Speed: 2
-  runTime: 0
-  maxRunTime: 2
-  maxJumps: 2
-  jumps: 0
-  jumpSpeed: 3
-  jumping: 0
-  maxJumpSpeed: 1.5
-  maxFallSpeed: -2.2
-  timeToMaxJumpSpeed: 0.2
+  movement: {x: 0, y: 0, z: 0}
+  m_FB: 0
+  m_LR: 0
+  g_accel: 0
+  j_height: 0
+  time: 2
+  duration: 0.44
+  x: 0
+  y: 2.3
+  z: 0
+  ending: {x: 0, y: 0, z: 0}
+  start: {x: 0, y: 0, z: 0}
+  lives:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  nbrLives: 3
+  takeDmg: 0
 --- !u!114 &1088205255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,11 +348,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b03d534712e4aedbea75bed0f751eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
   spawnPoint: {fileID: 8178619480444889901}
   ricePrefab: {fileID: 950740861775937049, guid: 68eeda8869cca41fbb218b2f2cdbe3b3,
     type: 3}
   myRice:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   soyPoint: {fileID: 3187961965897000109}
+  l_Manager: {fileID: 0}
