@@ -55,9 +55,7 @@ public class PlayerCamera : MonoBehaviour
         main = Camera.main;
         i_FOV = main.fieldOfView;
         properDistance = distFromPlayer;
-        pitchMinMax = new Vector2(5,10);
-        //Player = GameObject.FindGameObjectWithTag("Player");
-      
+        pitchMinMax = new Vector2(10,20);      
         if (lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -117,6 +115,7 @@ public class PlayerCamera : MonoBehaviour
         aimer.transform.LookAt(main.transform.position);
         if (Physics.Raycast(aimer.transform.position, aimer.transform.TransformDirection(Vector3.forward), out hit,10, layerMask))
         {
+            Debug.DrawRay(aimer.transform.position, aimer.transform.TransformDirection(Vector3.forward), Color.blue, distFromPlayer);
             float dist = hit.distance;
             if (dist < distFromPlayer)
             {

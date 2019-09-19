@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6016,7 +6016,7 @@ MonoBehaviour:
   playerFront: {x: 0, y: 0, z: 0}
   sensitivity: 3.57
   rotationsmoothTime: 1
-  distFromPlayer: 1
+  distFromPlayer: 2
   currentRotation: {x: 0, y: 0, z: 0}
   z_FOV: 30
   main: {fileID: 773700455}
@@ -15825,6 +15825,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7147114729487880583, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Sushi_Roll
+      objectReference: {fileID: 0}
+    - target: {fileID: 7147114729487880583, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7147114729487880583, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4897764932610506510, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15880,16 +15895,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7147114729487880583, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
-        type: 3}
-      propertyPath: m_Name
-      value: Sushi_Roll
-      objectReference: {fileID: 0}
-    - target: {fileID: 7147114729487880583, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 8178619480444889901, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -15932,6 +15937,16 @@ PrefabInstance:
       propertyPath: l_Manager
       value: 
       objectReference: {fileID: 292550791}
+    - target: {fileID: 5851801040841001600, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650115049442055047, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21a5c144efd22ff42ab4cbd8bdcc97e7, type: 3}
 --- !u!4 &1481187822211262714 stripped
