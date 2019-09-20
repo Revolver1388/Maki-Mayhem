@@ -77,7 +77,7 @@ public class LevelManager : MonoBehaviour
             r_Counter.text = Mathf.Floor(((r_Current / r_Max) * 100)) + "%";
             StartCoroutine(WaitForStart());
         }
-
+       
         //this all needs to be built up for multiple levels but serves the prototype well
         if (gameMan != null)
         {
@@ -164,6 +164,7 @@ public class LevelManager : MonoBehaviour
         h_Score = null;
     }
 
+  
     public float Score(float x, float y, float r, float rm)
     {
         return Mathf.Round((((x % 60) / (y / 60)) * (r / rm)) * 10);

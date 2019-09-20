@@ -418,8 +418,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 b_End = new Vector3(rb.position.x, rb.position.y + t_Distance / 2, rb.position.z - t_Distance);
         transform.position = Vector3.Slerp(transform.position, b_End, EaseIn(t_Time / t_Duration) * Time.deltaTime);
-
-        //In editor, set t_Time to 1.7 and t_Duration to 0.4
     }
 
     public void TofuBounceUp()
@@ -451,12 +449,9 @@ public class PlayerMovement : MonoBehaviour
         takeDmg = false;
     }
 
-    // Add bounce to player hop!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     IEnumerator UpSpeed()
     {
         wasabi = true;
-        //ending = new Vector3(rb.position.x + (movement.x / 4), w_height + rb.position.y, rb.position.z - (w_height/ 2));
-        //transform.position = Vector3.Slerp(transform.position, ending, EaseIn(w_Time / w_Duration) * Time.deltaTime);
         p_Speed = 4.5f;
         yield return new WaitForSeconds(3);
         p_Speed = 2;

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6726557810198107613}
   - component: {fileID: 3627998586814644111}
   - component: {fileID: 1243195907811459323}
+  - component: {fileID: 9176762209156096463}
+  - component: {fileID: 5803948071229838450}
   m_Layer: 0
   m_Name: Bowl
   m_TagString: Untagged
@@ -92,3 +94,31 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: c86616e5dcadfac4f822bb06faeb30e5, type: 3}
+--- !u!208 &9176762209156096463
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608285339773457277}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.47500002, y: 0.47500002, z: 0.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!114 &5803948071229838450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608285339773457277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e437535d45b6a45b63941b91285dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
