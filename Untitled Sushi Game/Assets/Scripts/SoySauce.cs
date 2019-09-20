@@ -31,8 +31,8 @@ public class SoySauce : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<HealthScript>();
-     
 
+        agent.Warp(transform.position);
         
         StartCoroutine(AnnoyPlayer());
 
