@@ -8,7 +8,9 @@ public class PlayerMovement : MonoBehaviour
 {
     Scene currentScene;
     string sceneName;
-
+    Renderer s_Render;
+    public Material s_Original;
+    public Material s_New;
     GameObject gameMan;
 
     //RigidBody Conditions
@@ -26,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     float distWall = 0.1f;
 
+    [Header("Player Movement Attributes")]
     //Player Movement Parametres
     Camera cam;
     public Vector3 movement;
@@ -42,13 +45,14 @@ public class PlayerMovement : MonoBehaviour
     //Jumping Parametres
 
     #region jump stuff
-    float gravity = 4;
+        [Header("Jump Attributes")]
+    //float gravity = 4;
     [Range(0, 3.5f)]
     public float g_accel;
     float j_counter;
     float j_Stregnth = 0.5f;
     float j_time;
-    float j_maxTime = 0.2f;
+    public float j_maxTime = 0.2f;
     float h_time = 0.2f;
     [SerializeField]
     float j_height;
@@ -57,20 +61,22 @@ public class PlayerMovement : MonoBehaviour
     bool f_on = false;
     float startOfJump;
     [Range(0, 5)]
-    public float time;
+    public float j_Time;
     [Range(0, 5)]
-    public float duration;
+    public float j_Duration;
     [Range(0, 20)]
     public float x;
+    [Range(0, 5)]
+    public float f_Time;
     [Range(0, 20)]
     public float y;
     [Range(0, 20)]
     public float z;
-
     public Vector3 ending;
     public Vector3 start;
     #endregion
 
+    [Header("Enemy and Life Attributes")]
     //Lives
     public List<GameObject> lives = new List<GameObject>();
     public float nbrLives = 3;
@@ -78,19 +84,28 @@ public class PlayerMovement : MonoBehaviour
 
     //Enemies
     GameObject sake;
+    //Wasabi
+    bool onFire = false;
     bool wasabi = false;
     [Range(0, 4)]
     public float w_Time;
     [Range(0, 4)]
     public float w_Duration;
     public float w_height;
-
+    //Tofu Stuff
+    public float t_Time;
+    public float t_Duration;
+    public float t_Distance;
     // Start is called before the first frame update
     void Start()
     {
         if (!cam)
         {
             cam = Camera.main;
+        }
+        if (!s_Render)
+        {
+            s_Render = GetComponent<Renderer>();
         }
         rb = GetComponent<Rigidbody>();
         playerSize = GetComponent<Collider>().bounds.size;
@@ -121,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
             j_release = false;
         }
         else if (Input.GetButtonDown("Jump") && j_time >= j_maxTime)
-        {          
+        {
             j_on = false;
             j_release = true;
         }
@@ -148,7 +163,23 @@ public class PlayerMovement : MonoBehaviour
             p_Speed = 2;
         }
 
+        if (wasabi)
+        {
+            s_Render.material.color = Color.Lerp(s_Original.color, Color.red, Mathf.PingPong(Time.time, .5f));
+        }
         #region Wall Checks
+
+        if (isGrounded())
+        {
+            if(ground.collider.gameObject.tag == "Tofu")
+            {
+                TofuBounceUp();
+            }
+            if(ground.collider.gameObject.tag == "sticky")
+            {
+                StartCoroutine(StickyTime());
+            }
+        }
 
         if (isBlockedForward())
         {
@@ -164,6 +195,11 @@ public class PlayerMovement : MonoBehaviour
             if (wall.collider.gameObject.tag == "Wasabi")
             {
                 StartCoroutine("UpSpeed");
+            }
+
+            if (wall.collider.gameObject.tag == "Tofu")
+            {
+                TofuBounceBack();
             }
         }
 
@@ -245,7 +281,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         #region Player Movement
-        if (isGrounded() && !j_on)
+        if (isGrounded() && !j_on || !isGrounded() && j_on)
         {
             m_Step = p_Speed * Time.deltaTime;
             m_LR = Input.GetAxis("Horizontal");
@@ -355,7 +391,7 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.y = 0.0f;
         float yPos = rb.position.y;
-        float g_Step = gravity;
+        float g_Step =  EaseIn(f_Time / g_accel);
         movement.y = -(yPos + g_Step);
         rb.MovePosition(rb.position + movement * Time.deltaTime);
     }
@@ -369,13 +405,28 @@ public class PlayerMovement : MonoBehaviour
         //movement.y = yPos + yVel;
         //rb.MovePosition(rb.position + movement * Time.deltaTime);
         //*****************************************************************************************************
-
         j_time += Time.deltaTime;
-        ending = new Vector3(rb.position.x + (movement.x/4), y + t, rb.position.z + (movement.z/4));
-        transform.position = Vector3.Slerp(transform.position, ending, EaseIn(time / duration) * Time.deltaTime);
+        ending = new Vector3(rb.position.x + (movement.x/4), y + t, rb.position.z + (movement.z/2));
+        transform.position = Vector3.Slerp(transform.position, ending, EaseIn(j_Time / j_Duration) * Time.deltaTime);
+    }
+    public static float EaseIn(float t)
+    {
+        return t * t;
     }
 
+    public void TofuBounceBack()
+    {
+        Vector3 b_End = new Vector3(rb.position.x, rb.position.y + t_Distance / 2, rb.position.z - t_Distance);
+        transform.position = Vector3.Slerp(transform.position, b_End, EaseIn(t_Time / t_Duration) * Time.deltaTime);
 
+        //In editor, set t_Time to 1.7 and t_Duration to 0.4
+    }
+
+    public void TofuBounceUp()
+    {
+        ending = new Vector3(rb.position.x + (movement.x / 4), 6.0f + rb.position.y, rb.position.z + (movement.z / 4));
+        transform.position = Vector3.Slerp(transform.position, ending, EaseIn(1.0f / 0.4f) * Time.deltaTime);
+    }
 
     IEnumerator WaitforInput(float t)
     {
@@ -399,21 +450,25 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(.3f);
         takeDmg = false;
     }
-    public static float EaseIn(float t)
-    {
-        return t * t;
-    }
 
     // Add bounce to player hop!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     IEnumerator UpSpeed()
     {
         wasabi = true;
-        //ending = new Vector3(rb.position.x + (movement.x / 4), w_height + rb.position.y, rb.position.z + (movement.z / 4));
+        //ending = new Vector3(rb.position.x + (movement.x / 4), w_height + rb.position.y, rb.position.z - (w_height/ 2));
         //transform.position = Vector3.Slerp(transform.position, ending, EaseIn(w_Time / w_Duration) * Time.deltaTime);
         p_Speed = 4.5f;
         yield return new WaitForSeconds(3);
         p_Speed = 2;
         wasabi = false;
+        s_Render.material = s_Original;
+    }
+
+    IEnumerator StickyTime()
+    {
+        p_Speed = 1;
+        yield return new WaitForSeconds(2);
+        p_Speed = 2;
     }
 }
 

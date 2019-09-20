@@ -8,7 +8,7 @@ public class Wasabi : MonoBehaviour
     GameObject player;
 
     public float range = 2;
-
+    public bool hit = false;
     Transform target;
     NavMeshAgent agent;
     Vector3 newPos;
@@ -32,7 +32,7 @@ public class Wasabi : MonoBehaviour
 
         if (Vector3.Distance(transform.position, player.transform.position) <= range)
         {
-            agent.destination = player.transform.position;
+            ChasePlayer();
         }
         else
         {
@@ -53,5 +53,23 @@ public class Wasabi : MonoBehaviour
         NavMeshHit navHit;
         NavMesh.SamplePosition(randomDir, out navHit, dist, layermask);
         return navHit.position;
+    }
+
+    void ChasePlayer()
+    {
+        
+        if (!hit)
+        {
+            agent.destination = player.transform.position;
+            hit = true;
+        }
+        else if(hit)
+            StartCoroutine(StopSmashing());
+    }
+    IEnumerator StopSmashing()
+    {
+        yield return new WaitForSeconds(1.5f);
+        hit = false;
+
     }
 }

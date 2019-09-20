@@ -55,7 +55,7 @@ public class PlayerCamera : MonoBehaviour
         main = Camera.main;
         i_FOV = main.fieldOfView;
         properDistance = distFromPlayer;
-        pitchMinMax = new Vector2(10,20);      
+        pitchMinMax = new Vector2(20,40);      
         if (lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
