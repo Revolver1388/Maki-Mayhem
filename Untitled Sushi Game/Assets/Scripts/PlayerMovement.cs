@@ -79,7 +79,11 @@ public class PlayerMovement : MonoBehaviour
     //Enemies
     GameObject sake;
     bool wasabi = false;
-
+    [Range(0, 4)]
+    public float w_Time;
+    [Range(0, 4)]
+    public float w_Duration;
+    public float w_height;
 
     // Start is called before the first frame update
     void Start()
@@ -404,8 +408,8 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator UpSpeed()
     {
         wasabi = true;
-        ending = new Vector3(rb.position.x + (movement.x / 4), 2.0f + rb.position.y, rb.position.z + (movement.z / 4));
-        transform.position = Vector3.Slerp(transform.position, ending, EaseIn(1.0f / 0.4f) * Time.deltaTime);
+        //ending = new Vector3(rb.position.x + (movement.x / 4), w_height + rb.position.y, rb.position.z + (movement.z / 4));
+        //transform.position = Vector3.Slerp(transform.position, ending, EaseIn(w_Time / w_Duration) * Time.deltaTime);
         p_Speed = 4.5f;
         yield return new WaitForSeconds(3);
         p_Speed = 2;
