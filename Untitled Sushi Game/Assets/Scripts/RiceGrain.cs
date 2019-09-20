@@ -76,7 +76,7 @@ public class RiceGrain : MonoBehaviour
 	// Update is called once per frame
 
 
-	private void FixedUpdate()
+	private void Update()
 	{
 
 
@@ -91,7 +91,7 @@ public class RiceGrain : MonoBehaviour
 			if (towards.sqrMagnitude < maxRange * maxRange)
 			{
 				DeActivate();
-				Debug.Log("I got there!");
+				//Debug.Log("I got there!");
 				l_Manager.GetComponent<LevelManager>().r_Current += 1;
 
 			}

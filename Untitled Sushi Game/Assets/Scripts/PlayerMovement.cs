@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     float distWall = 0.1f;
 
+    int layername; 
+
     //Player Movement Parametres
     Camera cam;
     public Vector3 movement;
@@ -33,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public float m_LR;
     float m_Step;
     float rotateSpeed = 8;
-    float p_Speed = 2;
+    public float p_Speed = 2;
 
     //sprint 
     float runTime = 0;
@@ -195,6 +197,9 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine("GameOver");
         }
+
+
+
     }
     private void FixedUpdate()
     {
@@ -230,6 +235,17 @@ public class PlayerMovement : MonoBehaviour
             float grounded = ground.point.y + (playerSize.y + heightOffGround);
             rb.position = new Vector3(rb.position.x + movement.x * m_Step, grounded, rb.position.z + movement.z * m_Step);
         }
+        #endregion
+
+
+        #region stick
+
+        if (isGrounded())
+            if (ground.collider.gameObject.tag == "sticky")
+            {
+                p_Speed = 1;
+                Debug.Log("You are sticky");
+            }
         #endregion
     }
 
@@ -302,6 +318,8 @@ public class PlayerMovement : MonoBehaviour
         return Physics.Linecast(lineStart, vectorToSearch, out above, layerMask);
     }
 
+
+   
     void Fall()
     {
         movement.y = 0.0f;

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8546100787006685148}
   - component: {fileID: 3394165146247787638}
   - component: {fileID: 2162866869770694582}
+  - component: {fileID: 8502411796600942440}
   m_Layer: 9
   m_Name: Small_Table_2
   m_TagString: Untagged
@@ -87,7 +88,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659226918334420461}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.3499999, y: 0.72000015, z: 0.21000005}
@@ -108,3 +109,15 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &8502411796600942440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659226918334420461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00471a7a12958a54b98bfd48a64197b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

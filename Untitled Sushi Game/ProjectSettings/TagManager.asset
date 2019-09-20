@@ -9,6 +9,7 @@ TagManager:
   - NoThrough
   - Sake
   - l_Manager
+  - sticky
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Ground
   - Sticky
   - Soy_Sauce_Area
-  - 
+  - Sticky
   - 
   - 
   - 
