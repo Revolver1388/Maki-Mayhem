@@ -9,7 +9,6 @@ public class Wasabi : MonoBehaviour
 
     public float range = 2;
 
-    Transform target;
     NavMeshAgent agent;
     Vector3 newPos;
 

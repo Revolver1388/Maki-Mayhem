@@ -10,6 +10,7 @@ TagManager:
   - Sake
   - l_Manager
   - Wasabi
+  - Tofu
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,8 @@ TagManager:
   - PostProcessing
   - NoThrough
   - Ground
-  - 
-  - 
+  - Wasabi
+  - Tofu
   - 
   - 
   - 

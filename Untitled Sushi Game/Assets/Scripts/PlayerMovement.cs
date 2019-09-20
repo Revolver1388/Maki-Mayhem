@@ -79,8 +79,16 @@ public class PlayerMovement : MonoBehaviour
     //Enemies
     GameObject sake;
     bool wasabi = false;
+    [Range(0, 4)]
+    public float w_Time;
+    [Range(0, 4)]
+    public float w_Duration;
+    public float w_height;
 
-
+    //Tofu Stuff
+    public float t_Time;
+    public float t_Duration;
+    public float t_Distance;
     // Start is called before the first frame update
     void Start()
     {
@@ -146,6 +154,14 @@ public class PlayerMovement : MonoBehaviour
 
         #region Wall Checks
 
+        if (isGrounded())
+        {
+            if (ground.collider.gameObject.tag == "Tofu")
+            {
+                TofuBounceUp();
+            }
+        }
+
         if (isBlockedForward())
         {
             float hitWall = wall.point.z + (playerSize.z/2 - distWall);
@@ -161,12 +177,17 @@ public class PlayerMovement : MonoBehaviour
             {
                 StartCoroutine("UpSpeed");
             }
+
+            if (wall.collider.gameObject.tag == "Tofu")
+            {
+                TofuBounceBack();
+            }
         }
 
         if (isBlockedBackward())
         {
-            float hitWall = wall.point.z + (playerSize.z/2 + distWall);
-            rb.position = new Vector3(rb.position.x + movement.x * m_Step, rb.position.y + movement.y * m_Step, hitWall);
+            float hitWall = wall.point.z + (playerSize.z / 2 + distWall);
+            
 
             if (wall.collider.gameObject.tag == "Sake" && !takeDmg)
             {
@@ -178,6 +199,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 StartCoroutine("UpSpeed");
             }
+            else
+            rb.position = new Vector3(rb.position.x + movement.x * m_Step, rb.position.y + movement.y * m_Step, hitWall);
         }
 
         if (isBlockedLeft())
@@ -371,6 +394,20 @@ public class PlayerMovement : MonoBehaviour
         transform.position = Vector3.Slerp(transform.position, ending, EaseIn(time / duration) * Time.deltaTime);
     }
 
+    public void TofuBounceBack()
+    {
+        Vector3 b_End = new Vector3(rb.position.x, rb.position.y + t_Distance/2, rb.position.z - t_Distance);
+        transform.position = Vector3.Slerp(transform.position, b_End, EaseIn(t_Time / t_Duration) * Time.deltaTime);
+
+        //In editor, set t_Time to 1.7 and t_Duration to 0.4
+    }
+
+    public void TofuBounceUp()
+    {
+        ending = new Vector3(rb.position.x + (movement.x / 4), 6.0f + rb.position.y, rb.position.z + (movement.z / 4));
+        transform.position = Vector3.Slerp(transform.position, ending, EaseIn(1.0f / 0.4f) * Time.deltaTime);
+    }
+
 
 
     IEnumerator WaitforInput(float t)
@@ -404,12 +441,14 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator UpSpeed()
     {
         wasabi = true;
-        ending = new Vector3(rb.position.x + (movement.x / 4), 2.0f + rb.position.y, rb.position.z + (movement.z / 4));
-        transform.position = Vector3.Slerp(transform.position, ending, EaseIn(1.0f / 0.4f) * Time.deltaTime);
+        //ending = new Vector3(rb.position.x + (movement.x / 4), w_height + rb.position.y, rb.position.z + (movement.z / 4));
+        //transform.position = Vector3.Slerp(transform.position, ending, EaseIn(w_Time / w_Duration) * Time.deltaTime);
         p_Speed = 4.5f;
         yield return new WaitForSeconds(3);
         p_Speed = 2;
         wasabi = false;
     }
+
+
 }
 

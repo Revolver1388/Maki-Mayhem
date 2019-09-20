@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Level1Prototype.unity
+- path: Assets/Scenes/BrieTest.unity
   isLoaded: 1
   isActive: 1
