@@ -9,6 +9,7 @@ TagManager:
   - NoThrough
   - Sake
   - l_Manager
+  - Wasabi
   layers:
   - Default
   - TransparentFX

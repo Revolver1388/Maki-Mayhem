@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour
         {
             case Levels.menu:
                 Nullifier();
-                lvlOne_hScore.text = "HighScore: " + $"{PlayerPrefs.GetFloat("LVL1HSCORE", highScore)}";
+                lvlOne_hScore.text = "¥" + $"{ PlayerPrefs.GetFloat("LVL1HSCORE", highScore)}";
                 break;
             case Levels.one:
                 l_MTime = 120;

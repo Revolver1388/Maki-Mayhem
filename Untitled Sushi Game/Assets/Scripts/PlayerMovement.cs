@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public float m_LR;
     float m_Step;
     float rotateSpeed = 8;
-    float p_Speed = 2;
+    public float p_Speed = 2;
 
     //sprint 
     float runTime = 0;
@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Enemies
     GameObject sake;
+    bool wasabi = false;
 
 
     // Start is called before the first frame update
@@ -137,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
                 p_Speed = 2;
             }
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) && !wasabi)
         {
             runTime = 0;
             p_Speed = 2;
@@ -155,6 +156,11 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(DamageTimer());
                 nbrLives -= 1;
             }
+
+            if (wall.collider.gameObject.tag == "Wasabi")
+            {
+                StartCoroutine("UpSpeed");
+            }
         }
 
         if (isBlockedBackward())
@@ -166,6 +172,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 StartCoroutine(DamageTimer());
                 nbrLives -= 1;
+            }
+
+            if (wall.collider.gameObject.tag == "Wasabi")
+            {
+                StartCoroutine("UpSpeed");
             }
         }
 
@@ -180,6 +191,11 @@ public class PlayerMovement : MonoBehaviour
                 nbrLives -= 1;
                 
             }
+
+            if (wall.collider.gameObject.tag == "Wasabi")
+            {
+                StartCoroutine("UpSpeed");
+            }
         }
 
         if (isBlockedRight())
@@ -191,6 +207,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 StartCoroutine(DamageTimer());
                 nbrLives -= 1;
+            }
+
+            if (wall.collider.gameObject.tag == "Wasabi")
+            {
+                StartCoroutine("UpSpeed");
             }
         }
 
@@ -377,6 +398,18 @@ public class PlayerMovement : MonoBehaviour
     public static float EaseIn(float t)
     {
         return t * t;
+    }
+
+    // Add bounce to player hop!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    IEnumerator UpSpeed()
+    {
+        wasabi = true;
+        ending = new Vector3(rb.position.x + (movement.x / 4), 2.0f + rb.position.y, rb.position.z + (movement.z / 4));
+        transform.position = Vector3.Slerp(transform.position, ending, EaseIn(1.0f / 0.4f) * Time.deltaTime);
+        p_Speed = 4.5f;
+        yield return new WaitForSeconds(3);
+        p_Speed = 2;
+        wasabi = false;
     }
 }
 
